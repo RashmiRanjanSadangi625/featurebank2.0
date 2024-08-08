@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CRUD Operations</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="css/montserrat-font.css">
+	<link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+	<!-- Main Style Css -->
+    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    {{>style}}
+    <style>
+    	.buttons
+    	{
+    	  margin:0;
+    	  padding:5px;
+    	  display:flex;
+    	  align-items:center;
+    	  justify-content:space-evenly;
+    	  width:auto;
+    	  height:10vh;
+    	  background-color:#3A3E59;
+    	  color:#fff;
+    	}
+    	.opbuttons
+    	{
+    		padding:10px;
+    		background-color: #ED6B5B;
+    		color: #fff;
+    		border: none;
+    		border-radius: 5px;
+    		cursor: pointer;
+    		font-size: 18px;
+    	}
+    </style>
+</head>
+<body>
+	{{>navbarsub}} 
+	<div class="buttons">
+		<button type="button" class="opbuttons" onclick="getData()">Read Data</button>
+		<button type="button" class="opbuttons" onclick="addData()">Insert Data</button>
+		<button type="button" class="opbuttons" onclick="updateData()">Update Data</button>
+		<button type="button" class="opbuttons" onclick="deleteData()">Delete Data</button>
+	</div>
+	<div class="page-content" id="getData">
+		<div class="form-v10-content">
+			<form class="form-detail"  action="/crud/getData" method ="POST" id="myform">
+				<div class="form-right">
+					<h2 style="text-align: center;">Enter Data To Search</h2>
+					<div class="form-row">
+						<input type="text" name="searchingdata" class="street" id="noOfDivs" placeholder="Enter email to search" required>
+					</div>
+					<div class="form-row-last" style="display: flex;align-items: center;justify-content: center;">
+						<input type="submit" name="register" class="register" value="Fetch Data" id="create">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="page-content" id="addData">
+		<div class="form-v10-content">
+			<form class="form-detail"  action="/crud/addData" method ="POST" id="myform">
+				<div class="form-right">
+					<h2 style="text-align: center;">Inserting Data to db</h2>
+					<div class="form-row">
+						<input type="email" name="email" class="street" placeholder="Enter Email" required>
+					</div>
+					<div class="form-row">
+						<input type="text" name="uname" class="street" placeholder="Enter Username" required>
+					</div>
+					<div class="form-row">
+						<input type="number" name="age" class="street" placeholder="Enter Age" required>
+					</div>
+					<div class="form-row-last" style="display: flex;align-items: center;justify-content: center;">
+						<input type="submit" name="register" class="register" value="Add Data" id="create">
+						<span  id = "divs" style="display: none;">{{divs}}</span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="page-content" id="updateData">
+		<div class="form-v10-content">
+			<form class="form-detail"  action="/crud/updateData" method ="POST" id="myform">
+				<div class="form-right">
+					<h2 style="text-align: center;">Updating Data to db</h2>
+					<div class="form-row">
+						<input type="email" name="email" class="street" placeholder="Enter the email whome data you want to update" required>
+					</div>
+					<div class="form-row">
+						<input type="text" name="uname" class="street" placeholder="Enter Name to Update" required>
+					</div>
+					<div class="form-row">
+						<input type="number" name="age" class="street" placeholder="Enter Age to Update" required>
+					</div>
+					<div class="form-row-last" style="display: flex;align-items: center;justify-content: center;">
+						<input type="submit" name="register" class="register" value="Update" id="create">
+						<span  id = "divs" style="display: none;">{{divs}}</span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="page-content" id="deleteData">
+		<div class="form-v10-content">
+			<form class="form-detail"  action="/crud/deleteData" method ="POST" id="myform">
+				<div class="form-right">
+					<h2 style="text-align: center;">Delete Data from db</h2>
+					<div class="form-row">
+						<input type="text" name="email" class="street" id="noOfDivs" placeholder="Enter email to delete data" required>
+					</div>
+					<div class="form-row-last" style="display: flex;align-items: center;justify-content: center;">
+						<input type="submit" name="register" class="register" value="Delete Data" id="create">
+						<span  id = "divs" style="display: none;">{{divs}}</span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="displaydata">{{email}} </br>{{uname}} </br>{{age}}</div>
+    <div id="status">{{status}}</div>
+
+	<script>
+	// Initialize sections
+	showSection("getData");
+
+	// Example usage
+	function getData() {
+	    showSection("getData");
+	}
+
+	function addData() {
+	    showSection("addData");
+	}
+
+	function updateData() {
+	    showSection("updateData");
+	}
+
+	function deleteData() {
+	    showSection("deleteData");
+	}
+		// Function to manage the visibility of sections
+	function showSection(sectionId) {
+	    // List of all sections
+	    const sections = ["getData", "addData", "updateData", "deleteData"];
+
+	    // Hide all sections
+	    sections.forEach(id => {
+	        document.getElementById(id).style.display = "none";
+	    });
+
+	    // Show the selected section
+	    document.getElementById(sectionId).style.display = "";
+
+	}
+
+	</script>
+</body>
