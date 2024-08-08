@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Search Users</title>
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Font-->
+    <link rel="stylesheet" type="text/css" href="css/montserrat-font.css">
+    <link rel="stylesheet" type="text/css" href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <!-- Main Style Css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style>
+        /* Basic styling */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .search-bar {
+            margin-bottom: 10px;
+        }
+        .search-bar input, .search-bar button {
+            margin-right: 10px;
+        }
+        .user-list {
+            list-style: none;
+            padding: 0;
+        }
+        .user-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .loading {
+            text-align: center;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Search</h1>
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search by name or email">
+            <button id="searchButton">Search</button>
+        </div>
+        <ul id="userList" class="user-list"></ul>
+        <div id="loading" class="loading" style="display: none;">Loading...</div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('search');
+            const userList = document.getElementById('userList');
+            const loadingIndicator = document.getElementById('loading');
+            const searchButton = document.getElementById('searchButton');
+
+            async function fetchUsers() {
+                const search = searchInput.value.trim();
+
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+
+                try {
+                    const query = new URLSearchParams({ search });
+                    const response = await fetch(`/api/users?${query}`);
+                    const users = await response.json();
+                    displayUsers(users);
+                } catch (error) {
+                    console.error('Error fetching users:', error);
+                } finally {
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+                }
+            }
+
+            function displayUsers(users) {
+                userList.innerHTML = '';
+                users.forEach(user => {
+                    const li = document.createElement('li');
+                    li.textContent = `${user.username} - ${user.email} - ${user.zip_code}`;
+                    userList.appendChild(li);
+                });
+            }
+
+            searchButton.addEventListener('click', fetchUsers);
+
+            // Optionally, uncomment the following line if you want to trigger fetch on input change
+            // searchInput.addEventListener('input', fetchUsers);
+        });
+    </script>
+</body>
+</html>
