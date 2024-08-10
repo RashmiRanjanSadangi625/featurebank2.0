@@ -17,7 +17,7 @@
     "requests": "^0.3.0",
     "unirest": "^0.6.0"
   },
-  "name": "featurebank",
+  "name": "y",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -26,8 +26,16 @@
   },
   "author": "rrs",
   "license": "ISC",
-  "description": "",
+  "description": "learning project",
   "devDependencies": {
     "tailwindcss": "^3.4.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RashmiRanjanSadangi625/featurebank2.0.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RashmiRanjanSadangi625/featurebank2.0/issues"
+  },
+  "homepage": "https://github.com/RashmiRanjanSadangi625/featurebank2.0#readme"
 }

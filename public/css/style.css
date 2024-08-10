@@ -950,3 +950,123 @@ body
     		align-items: center;
     		justify-content: center;
     	} 
+.content
+    	{
+  			width: 100%;
+  			background-color: #3A3E59;
+			height: 100%;
+    	}
+    	.form-content-left
+    	{
+    		background-color: #3A3E59;
+    		float: left; 
+    		width: 50%; 
+    		border: 1px solid black;
+    		height: 84.5vh;
+    	}
+    	label
+    	{
+    		/*margin: 10px;*/
+    		color: #fff;
+    		text-align: center;
+
+    	}
+    	input
+    	{
+    		margin: 10px;
+    	}
+    	.form-content-right
+    	{
+    		height: 100%;
+/*    		border: 1px solid black;*/
+    	}
+    	.right-section-content
+    	{
+    		display: flex;
+    		align-items: flex-start;
+    		justify-content: space-evenly;
+    	}
+    	.right-section-content-body
+    	{
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+    	}
+    	table
+    	{
+    		border: 1px solid #fff;
+/*    		margin: 20px;*/
+    	}
+    	th
+    	{
+/*    		text-decoration: underline;*/
+    		text-align: center;
+    		font-size: 20px;
+    	}
+    	th,td
+    	{
+    		padding: 10px;
+    		color: #fff;
+    		text-align: center;
+    	}
+    	.thead
+    	{
+    		padding: 30px;
+    		padding-bottom: 10px;
+    		border-bottom: 1px solid #fff;
+    		font-family : "serif";
+/*    		text-align: center;*/
+    	}
+    	.email
+    	{
+    		width: 150px;
+    	}
+    	.form-detail
+    	{
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+       }
+    	h3 ,h4
+    	{
+    		color: #fff;
+    	}
+    	p
+    	{
+    		color: #fff;
+    	}
+    	.box
+    	{
+    		display: inline;
+    	}
+    	.boxes
+    	{
+    		height: 50px;
+    		width: 50px;
+    		border: 1px solid black;
+    		border-radius: 10px;
+    	}
+    	.buttons
+    	{
+    	  margin:0;
+    	  padding:5px;
+    	  display:flex;
+    	  align-items:center;
+    	  justify-content:space-evenly;
+    	  width:auto;
+    	  height:10vh;
+    	  background-color:#3A3E59;
+    	  color:#fff;
+    	  border: none;
+    	}
+    	.opbuttons
+    	{
+    		margin: 10px;
+    		padding:10px;
+    		background-color: #ED6B5B;
+    		color: #fff;
+    		border: none;
+    		border-radius: 5px;
+    		cursor: pointer;
+    		font-size: 18px;
+    	}

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Search Users</title>
+    <title>Search & Filter</title>
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- Font-->
@@ -11,17 +11,27 @@
     <!-- Main Style Css -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <style>
-        /* Basic styling */
         .container {
-            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0;
         }
         .search-bar {
-            margin-bottom: 10px;
+            background-color: #3A3E59;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
         }
-        .search-bar input, .search-bar button {
+        .search-bar input, .search-bar select, .search-bar button {
             margin-right: 10px;
+        }
+        .list
+        {
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .user-list {
             list-style: none;
@@ -36,41 +46,62 @@
             color: #888;
             margin-top: 20px;
         }
+        .btn
+        {
+            margin: 10px;
+            padding:10px;
+            background-color: #ED6B5B;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+
+        }
     </style>
 </head>
 <body>
+    {{>navbarsub}}
     <div class="container">
-        <h1>User Search</h1>
         <div class="search-bar">
             <input type="text" id="search" placeholder="Search by name or email">
-            <button id="searchButton">Search</button>
+            <select id="zipFilter">
+                <option value="">Filter by zip code</option>
+                <!-- Add more zip code options here as needed -->
+                <option value="253652">253652</option>
+                <option value="454121">454121</option>
+                <option value="145412">145412</option>
+            </select>
+            <button id="searchButton" class = "btn">Search</button>
         </div>
-        <ul id="userList" class="user-list"></ul>
+        <div class="list">
+            <ul id="userList" class="user-list"></ul>
+        </div>
         <div id="loading" class="loading" style="display: none;">Loading...</div>
     </div>
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('search');
+            const zipFilter = document.getElementById('zipFilter');
             const userList = document.getElementById('userList');
             const loadingIndicator = document.getElementById('loading');
             const searchButton = document.getElementById('searchButton');
 
             async function fetchUsers() {
-                const search = searchInput.value.trim();
+                const search = searchInput.value;
+                const zip_code = zipFilter.value;
 
-                // Show loading indicator
-                loadingIndicator.style.display = 'block';
-
+                const query = new URLSearchParams({ search, zip_code });
+                loadingIndicator.style.display = 'block'; // Show loading indicator
                 try {
-                    const query = new URLSearchParams({ search });
-                    const response = await fetch(`/api/users?${query}`);
+                    const response = await fetch(`/filter/requests?${query}`);
                     const users = await response.json();
+
                     displayUsers(users);
                 } catch (error) {
                     console.error('Error fetching users:', error);
                 } finally {
-                    // Hide loading indicator
-                    loadingIndicator.style.display = 'none';
+                    loadingIndicator.style.display = 'none'; // Hide loading indicator
                 }
             }
 
@@ -85,8 +116,8 @@
 
             searchButton.addEventListener('click', fetchUsers);
 
-            // Optionally, uncomment the following line if you want to trigger fetch on input change
-            // searchInput.addEventListener('input', fetchUsers);
+            // Initial fetch
+            fetchUsers();
         });
     </script>
 </body>

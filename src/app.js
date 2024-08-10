@@ -433,10 +433,10 @@ app.get("/filter",async (req,res)=>
 {
     res.render("filter");
 })
-app.get("/filter/requests",async (req,res) =>
-{
-     try {
-        const { search } = req.query;
+// API endpoint to search users
+app.get('/filter/requests', async (req, res) => {
+    try {
+        const { search, zip_code } = req.query;
         let filter = {};
 
         if (search) {
@@ -446,7 +446,11 @@ app.get("/filter/requests",async (req,res) =>
             ];
         }
 
-        const users = await Users.find(filter);
+        if (zip_code) {
+            filter.zip_code = zip_code;
+        }
+
+        const users = await User.find(filter);
         res.status(200).json(users);
     } catch (err) {
         res.status(500).json({ error: 'An error occurred while fetching users' });
@@ -540,11 +544,9 @@ var password;
 //-------------Fetch Data Function(Google sheet)------------------------
 const getData= async (email) =>
 {
+
 	//use service account creds
-	doc.useServiceAccountAuth({
-		client_email:credentials.client_email,
-		private_key:credentials.private_key
-	})
+	doc.useServiceAccountAuth(credentials)
 
 	//load the document info
 	await doc.loadInfo();
