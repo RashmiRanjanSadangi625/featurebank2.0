@@ -264,7 +264,7 @@ app.post("/dynamicdiv",(req,res)=>
 //-------------------------------------------
 app.get("/sentEmail",(req,res)=>
 {
-	res.render("sentEmail");
+	res.render("sentemail");
 })
 const emailOpts = multer({ storage: storage }).single("files");
 app.post("/sendEmail",(req,res)=>
